@@ -1,0 +1,6 @@
+[user]
+	name = Justin Bishop
+	email = mail@dissoc.me
+	signingkey = 81FF5EC766ED8C39
+[commit]
+	gpgsign = true
