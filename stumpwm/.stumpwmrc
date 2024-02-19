@@ -113,7 +113,7 @@
             "Opens chromium from home connection"
             (run-shell-command "chromium --user-data-dir=~/.config/chromium-remote" ))
 
-g(defcommand chromium-youtube () ()
+(defcommand chromium-youtube () ()
              "Opens chromium from home connection for use with youtube"
              (run-shell-command "chromium --user-data-dir=~/.config/chromium-youtube" ))
 
