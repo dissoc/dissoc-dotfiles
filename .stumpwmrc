@@ -1,0 +1,173 @@
+;;# -*- mode: Lisp; -*-
+(sb-posix:putenv "SBCL_HOME=/home/dissoc/.guix-profile/lib/sbcl")
+(in-package :stumpwm)
+
+(set-prefix-key (kbd "C-t"))
+
+(setf *mouse-focus-policy* :click)
+
+(setf *window-border-style* :tight)
+
+(setf *message-window-padding* 100)
+
+(setf *message-window-y-padding* 60)
+
+(setf *normal-border-width* 8)
+
+(defmacro utl-set-color (val color)
+  "Similar to `set-any-color', but without updating colors."
+  `(dolist (s *screen-list*)
+     (setf (,val s) (alloc-color s ,color))))
+
+(utl-set-color screen-focus-color (hex-to-xlib-color "#702963"))
+
+(defcommand screenshot () ()
+            "creates a screenshot using scrot"
+            (run-shell-command "scrot -s -z ~/Pictures/Screenshots/$(date +%F-%T).png"))
+
+(defcommand screensaver () ()
+            "starts xscreensaver"
+            (run-shell-command "xscreensaver"))
+
+(defcommand autorandr () ()
+            "starts autorandr"
+            (run-shell-command "autorandr default"))
+
+(defcommand emacs-daemon () ()
+            "Start emacs daemon"
+            (run-shell-command
+             "ps aux | grep -F 'emacs --daemon=general' | grep -v grep; [[ $? == 0 ]] || emacs --daemon=general;"))
+
+(defcommand emacs-guix-daemon () ()
+            "Start emacs guix-daemon"
+            ;; (run-shell-command
+            ;;  "emacs --daemon=emacsguix")
+            (run-or-raise "emacs --daemon=emacsguix && emacsclient -r --socket-name=emacsguix --eval '(guix)'"
+                          '(:title "emacs-guix")))
+
+(defcommand guix-pull () ()
+            "Opens an Emacs instance of guix and run guix-pull"
+            (run-shell-command "emacsclient -r --socket-name=emacsguix --eval '(guix-pull)'" ))
+
+(defcommand guix-packages-by-name (package-name) ((:string "enter package name: "))
+            "Opens an Emacs instance of guix and run guix-packages-by-name"
+            (let* ((cmd (concatenate 'string "emacsclient -r --socket-name=emacsguix --eval "
+                                     "'(guix-packages-by-name \""
+                                     package-name "\")'")))
+              (run-or-raise cmd '(:title "emacs-guix"))))
+
+(defcommand next-browser () ()
+            (run-or-raise "next" '(:class "next")))
+
+(defcommand eshell () ()
+            "Opens an Emacs instance of eshell"
+            (run-shell-command "emacsclient -c --socket-name=general --eval '(aweshell-new)'" ))
+
+(defcommand emacs () ()
+            "Start emacs"
+            (run-shell-command "emacs")  )
+
+(defcommand dired-home () ()
+            "Opens an Emacs instance of dired"
+            (run-shell-command "emacsclient -c --eval '(dired \"~\")'" ))
+
+(defcommand guix () ()
+            "Opens an Emacs with guix"
+            (run-or-raise "emacs -T emacs-guix --eval '(guix)'"
+                          '(:title "emacs-guix")))
+(defcommand gnus () ()
+            "Opens an Emacs with guix"
+            (run-or-raise "emacs -T emacs-gnus --eval '(gnus)'"
+                          '(:title "emacs-gnus")))
+
+(defcommand dired-home () ()
+            "Opens an Emacs instance of dired"
+            (run-shell-command "emacsclient -c --eval '(telega)'" ))
+
+(defcommand zabbix-console () ()
+            "Opens chromium in app mode with own profile"
+            (let ((zabbix-url "http://zabbix.dissoc.local/zabbix.php?action=dashboard.view"))
+              (run-shell-command
+               (concatenate 'string
+                            "chromium --user-data-dir=~/.config/zabbix-chromium --app="
+                            zabbix-url))))
+
+(defcommand terminal () ()
+            "opens a alacritty terminal"
+            (run-shell-command "alacritty" ))
+
+(defcommand todo () ()
+            "Opens an Emacs TODO.org"
+            (run-or-raise "emacs ~/Workspace/TODO/TODO.org"
+                          '(:title "emacs Prelude - ~/Workspace/TODO/TODO.org")))
+
+(defcommand chromium () ()
+            "Opens an Emacs instance of dired"
+            (run-shell-command "cd /tmp && guix environment --preserve='^DISPLAY$' --container --user=carl --network --share=$HOME/.Xauthority --ad-hoc ungoogled-chromium -- chromium --disable-dev-shm-usage" ))
+
+(defcommand chromium-home () ()
+            "Opens chromium from home connection"
+            (run-shell-command "chromium --proxy-server=socks://10.45.136.1:5000 --user-data-dir=~/.config/chromium-local" ))
+
+(defcommand chromium-remote () ()
+            "Opens chromium from home connection"
+            (run-shell-command "chromium --user-data-dir=~/.config/chromium-remote" ))
+
+g(defcommand chromium-youtube () ()
+             "Opens chromium from home connection for use with youtube"
+             (run-shell-command "chromium --user-data-dir=~/.config/chromium-youtube" ))
+
+(defcommand chromium-burp () ()
+            "Opens chromium from burpsuite connection"
+            (run-shell-command "chromium --proxy-server=http://127.0.0.1:48080 --user-data-dir=~/.config/burpsuite"))
+
+(defcommand kodi () ()
+            "Opens kodi in a container"
+            (run-shell-command "cd ~/Containers/kodi && guix shell --preserve='^DISPLAY$' --container  --network --expose=/var/run/dbus --expose=$HOME/.Xauthority  --share=/home/dissoc/Containers/kodi/ --share=/dev/snd --share=/dev/dri --expose=/sys/dev --expose=/sys/devices --share=/dev/shm --share=/tmp --share=/run/user/1000/pulse/ --share=/home/dissoc/.config/pulse --share=/run/user/1000/pulse  alsa-plugins:pulseaudio kodi alsa-lib pulseaudio coreutils alsa-utils wget curl nss-certs openssl xterm pavucontrol grep bash -- env KODI_DATA=. env PULSE_SERVER=unix:/tmp/pulseaudio.socket env PULSE_COOKIE=/tmp/pulseaudio.cookie kodi"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; key bindings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; basic stump keybindings
+
+(define-key *root-map* (kbd "C-f") "move-focus right")
+
+(define-key *root-map* (kbd "C-b") "move-focus left")
+
+(define-key *root-map* (kbd "C-n") "move-focus down")
+
+(define-key *root-map* (kbd "C-p") "move-focus up")
+
+(define-key *root-map* (kbd "M-f") "move-window right")
+
+(define-key *root-map* (kbd "M-b") "move-window left")
+
+(define-key *root-map* (kbd "M-n") "move-window down")
+
+(define-key *root-map* (kbd "M-p") "move-window up")
+
+(define-key *root-map* (kbd "g") "grouplist")
+
+(define-key *root-map* (kbd "w") "windowlist")
+
+(define-key *root-map* (kbd "}") "screenshot")
+
+(define-key *root-map* (kbd "e") "emacs")
+
+(define-key *root-map* (kbd "d") "dired-home")
+
+(define-key *root-map* (kbd "U") "eshell")
+
+(define-key *root-map* (kbd "t") "telegram")
+
+(define-key *root-map* (kbd "c") "next-browser")
+
+(define-key *root-map* (kbd "u") "terminal")
+
+(defun init-stump ()
+  "Function that runs when stump is started"
+  (screensaver)
+  (autorandr))
+
+(init-stump)
