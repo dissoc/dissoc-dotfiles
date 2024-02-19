@@ -7,6 +7,10 @@
 (scroll-bar-mode -1)
 (global-hl-line-mode t)
 
+;; load custom file so things like loading custom theme are remembered as okay
+(setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
+(load custom-file)
+
 (when (package-installed-p 'darkokai-theme)
   (load-theme 'darkokai))
 
