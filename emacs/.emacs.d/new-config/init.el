@@ -11,8 +11,8 @@
 (setq custom-file (expand-file-name "emacs-custom.el" user-emacs-directory))
 (load custom-file)
 
-(when (package-installed-p 'darkokai-theme)
-  (load-theme 'darkokai))
+(when (package-installed-p 'ef-themes)
+  (load-theme 'ef-cherie))
 
 (require 'package)
 
@@ -20,6 +20,7 @@
              '("melpa" . "https://melpa.org/packages/") t)
 
 (defvar my-packages '(avy
+                      ef-themes
                       load-relative
                       undo-tree
                       darkokai-theme))
