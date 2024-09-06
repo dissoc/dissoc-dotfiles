@@ -30,6 +30,15 @@
           (openpgp-fingerprint
            "95D3 7A96 EC54 79CE 6082  5831 81FF 5EC7 66ED 8C39"))))
        (channel
+        (name 'dissoc-guix-confs)
+        (url "https://github.com/dissoc/dissoc-guix-confs.git")
+        (branch "main")
+        (introduction
+         (make-channel-introduction
+          "acd4683fa1cac3fda4b89f8a8d69af784f3b7577"
+          (openpgp-fingerprint
+           "95D3 7A96 EC54 79CE 6082  5831 81FF 5EC7 66ED 8C39"))))
+       (channel
         (name 'nonguix)
         (url "https://gitlab.com/nonguix/nonguix")
         (introduction
