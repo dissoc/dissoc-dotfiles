@@ -8,6 +8,8 @@
 (setf *default-package* :stumpwm)
 
 (load-module "swm-gaps")
+(load-module "globalwindows")
+(load-module "ttf-fonts")
 
 ;; Head gaps run along the 4 borders of the monitor(s)
 (setf swm-gaps:*head-gaps-size* 20)
