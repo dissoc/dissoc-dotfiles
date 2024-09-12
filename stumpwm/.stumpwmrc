@@ -1,6 +1,23 @@
 ;;# -*- mode: Lisp; -*-
 (sb-posix:putenv "SBCL_HOME=/home/dissoc/.guix-profile/lib/sbcl")
+
 (in-package :stumpwm)
+
+(set-module-dir "/run/current-system/profile/share/common-lisp/sbcl/")
+
+(setf *default-package* :stumpwm)
+
+(load-module "swm-gaps")
+
+;; Head gaps run along the 4 borders of the monitor(s)
+(setf swm-gaps:*head-gaps-size* 20)
+
+;; Inner gaps run along all the 4 borders of a window
+(setf swm-gaps:*inner-gaps-size* 10)
+
+;; Outer gaps add more padding to the outermost borders of a window (touching
+;; the screen border)
+(setf swm-gaps:*outer-gaps-size* 20)
 
 (set-prefix-key (kbd "C-t"))
 
