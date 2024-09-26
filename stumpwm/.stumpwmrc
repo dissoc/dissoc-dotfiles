@@ -8,7 +8,7 @@
 (setf *default-package* :stumpwm)
 
 (load-module "swm-gaps")
-(load-module "globalwindows")
+;;(load-module "globalwindows")
 (load-module "ttf-fonts")
 
 ;; Head gaps run along the 4 borders of the monitor(s)
@@ -144,6 +144,10 @@
   "Opens kodi in a container"
   (run-shell-command "cd ~/Containers/kodi && guix shell --preserve='^DISPLAY$' --container  --network --expose=/var/run/dbus --expose=$HOME/.Xauthority  --share=/home/dissoc/Containers/kodi/ --share=/dev/snd --share=/dev/dri --expose=/sys/dev --expose=/sys/devices --share=/dev/shm --share=/tmp --share=/run/user/1000/pulse/ --share=/home/dissoc/.config/pulse --share=/run/user/1000/pulse  alsa-plugins:pulseaudio kodi alsa-lib pulseaudio coreutils alsa-utils wget curl nss-certs openssl xterm pavucontrol grep bash -- env KODI_DATA=. env PULSE_SERVER=unix:/tmp/pulseaudio.socket env PULSE_COOKIE=/tmp/pulseaudio.cookie kodi"))
 
+(defcommand set-wallpaper () ()
+            "sets the wallpaper with feh"
+            (run-shell-command "feh --bg-fill Pictures/wallpaper.jpg" ))
+
 (defun disable-key (key-num)
   (run-shell-command (concatenate 'string
                                   "xmodmap -e 'keycode '"
@@ -219,6 +223,7 @@
 (defun init-stump ()
   "Function that runs when stump is started"
   (screensaver)
-  (autorandr))
+  (autorandr)
+  (set-wallpaper))
 
 (init-stump)
