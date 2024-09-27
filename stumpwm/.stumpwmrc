@@ -224,6 +224,7 @@
   "Function that runs when stump is started"
   (screensaver)
   (autorandr)
-  (set-wallpaper))
+  (set-wallpaper)
+  (swm-gaps:toggle-gaps-on))
 
 (init-stump)
