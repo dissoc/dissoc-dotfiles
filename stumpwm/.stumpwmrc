@@ -12,14 +12,14 @@
 (load-module "ttf-fonts")
 
 ;; Head gaps run along the 4 borders of the monitor(s)
-(setf swm-gaps:*head-gaps-size* 20)
+(setf swm-gaps:*head-gaps-size* 10)
 
 ;; Inner gaps run along all the 4 borders of a window
 (setf swm-gaps:*inner-gaps-size* 10)
 
 ;; Outer gaps add more padding to the outermost borders of a window (touching
 ;; the screen border)
-(setf swm-gaps:*outer-gaps-size* 20)
+(setf swm-gaps:*outer-gaps-size* 10)
 
 (set-prefix-key (kbd "C-t"))
 
