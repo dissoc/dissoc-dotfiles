@@ -1,0 +1,9 @@
+#+TITLE:     dissoc-dotfiles
+#+AUTHOR:    dissoc
+#+LANGUAGE:  en
+#+EMAIL:     (concat "mail" @ "dissoc.me")
+
+#+OPTIONS: num:nil
+#+OPTIONS: toc:nil
+
+contains dotfiles
