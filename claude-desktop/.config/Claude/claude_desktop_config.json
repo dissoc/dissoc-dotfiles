@@ -1,0 +1,18 @@
+{
+    "mcpServers": {
+        "clojure-mcp-7888": {
+            "command": "/run/current-system/profile/bin/bash",
+            "args": [
+                "-c",
+                "exec 2>/tmp/clojure-mcp-debug-7888.log && echo 'Starting MCP server...' >&2 && export CONFIG_PATH=/home/dissoc/.config/clojure/deps.edn && export PATH=/run/current-system/profile/bin:/home/dissoc/.guix-profile/bin:$PATH && source /home/dissoc/.guix-profile/etc/profile && export SSL_CERT_FILE=/home/dissoc/.guix-profile/etc/ssl/certs/ca-certificates.crt && export SSL_CERT_DIR=/home/dissoc/.guix-profile/etc/ssl/certs && export GIT_SSL_CAINFO=/home/dissoc/.guix-profile/etc/ssl/certs/ca-certificates.crt && echo \"SSL_CERT_FILE=$SSL_CERT_FILE\" >&2 && echo 'Environment loaded, starting clojure...' >&2 && exec clojure -X:mcp :port 7888"
+            ]
+        },
+        "clojure-mcp-8888": {
+            "command": "/run/current-system/profile/bin/bash",
+            "args": [
+                "-c",
+                "exec 2>/tmp/clojure-mcp-debug-8888.log && echo 'Starting MCP server...' >&2 && export CONFIG_PATH=/home/dissoc/.config/clojure/deps.edn && export PATH=/run/current-system/profile/bin:/home/dissoc/.guix-profile/bin:$PATH && source /home/dissoc/.guix-profile/etc/profile && export SSL_CERT_FILE=/home/dissoc/.guix-profile/etc/ssl/certs/ca-certificates.crt && export SSL_CERT_DIR=/home/dissoc/.guix-profile/etc/ssl/certs && export GIT_SSL_CAINFO=/home/dissoc/.guix-profile/etc/ssl/certs/ca-certificates.crt && echo \"SSL_CERT_FILE=$SSL_CERT_FILE\" >&2 && echo 'Environment loaded, starting clojure...' >&2 && exec clojure -X:mcp :port 8888"
+            ]
+        }
+    }
+}
