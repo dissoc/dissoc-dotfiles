@@ -84,7 +84,7 @@
 
 (defcommand emacs () ()
   "Start emacs"
-  (run-shell-command "emacs")  )
+  (run-shell-command "emacs --background-color black"))
 
 (defcommand dired-home () ()
   "Opens an Emacs instance of dired"
