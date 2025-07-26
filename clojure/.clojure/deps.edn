@@ -1,0 +1,13 @@
+{:deps {commons-io/commons-io {:mvn/version "2.19.0"}}
+ :aliases
+ ;; mcp server for claude desktop to run
+ ;; see the claude-desktop/.config/Claude/claude_desktop_config.json
+ ;; for claude's script that calls this
+ {:mcp
+  {:deps      {commons-io/commons-io   {:mvn/version "2.19.0"}
+               org.slf4j/slf4j-nop     {:mvn/version "2.0.16"} ;; Required for stdio server
+               com.bhauman/clojure-mcp {:git/url "https://github.com/bhauman/clojure-mcp.git"
+                                        :git/tag "v0.1.7-alpha-pre"
+                                        :git/sha "d28a671"}}
+   :exec-fn   clojure-mcp.main/start-mcp-server
+   :exec-args {:port 7888}}}}
